@@ -108,7 +108,11 @@ class App {
   }
 
   _newWorkout(e) {
+    const validInputs = (...inputs) =>
+      inputs.every((inp) => Number.isFinite(inp));
+
     e.preventDefault();
+
     // get data from form
     const type = inputType.value;
     const distance = +inputCadence.value;
@@ -119,9 +123,10 @@ class App {
       const cadence = +inputCadence.value;
       console.log("tested1");
       if (
-        !Number.isFinite(distance) ||
-        !Number.isFinite(duration) ||
-        !Number.isFinite(cadence)
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+        !validInputs(distance, duration, cadence)
       )
         return alert("input have to be positive numbers");
     }
@@ -130,6 +135,13 @@ class App {
       console.log("tested2");
 
       const elevation = +inputElevation.value;
+      if (
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+        !validInputs(distance, duration, cadence)
+      )
+        return alert("input have to be positive numbers");
     }
     // add new obj to workout array
     // workout on map forms
@@ -158,3 +170,10 @@ class App {
 }
 
 const app = new App();
+
+function setLocalStorage() {
+  localStorage.setItem("workouts", "kiran");
+}
+
+setLocalStorage();
+console.log(localStorage.getItem("workouts"));
